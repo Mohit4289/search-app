@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Results for "{{ query }}"</h2>
+
+<h3>YouTube Videos:</h3>
+<div class="results-container">
+    {% for video in youtube_videos %}
+    <div class="video-card">
+        <a href="{{ video.url }}">
+            <img src="{{ video.thumbnail_url }}" alt="{{ video.title }}">
+            <h3>{{ video.title }}</h3>
+            <p>Views: {{ video.views }}</p>
+            <p>Likes: {{ video.likes }}</p>
+        </a>
+    </div>
+    {% empty %}
+    <p>No YouTube results found.</p>
+    {% endfor %}
+</div>
+
+
+<h3>Articles:</h3>
+<div class="results-container">
+    {% for article in articles %}
+    <div class="article-card">
+        <a href="{{ article.url }}">
+            <h3>{{ article.title }}</h3>
+            <p>{{ article.snippet }}</p>
+        </a>
+    </div>
+    {% empty %}
+    <p>No articles found.</p>
+    {% endfor %}
+</div>
+
+<h3>Academic Papers:</h3>
+<div class="results-container">
+    {% for paper in academic_papers %}
+    <div class="paper-card">
+        <a href="{{ paper.url }}">
+            <h3>{{ paper.title }}</h3>
+            <p>{{ paper.snippet }}</p>
+        </a>
+    </div>
+    {% empty %}
+    <p>No academic papers found.</p>
+    {% endfor %}
+</div>
+
+<a href="{% url 'search' %}">Back to Search</a>
+{% endblock %}
